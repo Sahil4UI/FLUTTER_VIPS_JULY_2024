@@ -11,7 +11,8 @@ class MyCalc extends StatefulWidget {
 }
 class _MyCalcState extends State<MyCalc> {
   TextEditingController ctrl = TextEditingController();
-  var result = "";
+  String result = "";
+  bool isOpr = false;
   List<List> btnsTxt = [
     ["7", "8", "9", "+"],
     ["4", "5", "6", "-"],
@@ -19,23 +20,38 @@ class _MyCalcState extends State<MyCalc> {
     ["C", "0", "=", "/"]
   ];
 
-  calc(String btnText)
+  myCalc(String btnText)
   {
-        print(btnText+" is called");
-        if (!btnText.contains("C") || !btnText.contains("="))
+       if(btnText=="C")
+       {
+            result = "";
+       }
+       else if(btnText =="=")
+       {
+            result=eval(result).toString();
+       }
+       else if (["+","-","*","/"].contains(btnText)){
+        if (isOpr==true)
         {
-            print("not equals");
-            result += btnText;
-            // ctrl.value = result as TextEditingValue;
-            print(result);
+            result = result.substring(0,result.length-1)+btnText;
         }
+        else
+        {
+              result+=btnText;
+        }
+ 
+          isOpr = true;
+
+       }
+       else{
+          result+=btnText;
+          isOpr = false;
+       }
+       ctrl.text = result;
         setState(() {
-          
-        });
-      //  if (btnText.contains("="))
-      //   {
-      //     print(eval(result));
-      //   }
+              
+            });
+       
   }
   @override
   Widget build(BuildContext context) {
@@ -52,34 +68,44 @@ class _MyCalcState extends State<MyCalc> {
       body: Container(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextField(
               controller: ctrl,
               textAlign: TextAlign.end,
               decoration: InputDecoration(
-                  hintText:result,
+                  hintText: "0",
                   hintStyle: TextStyle(
                     fontSize: 40,
                   )),
               style: TextStyle(fontSize: 40),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             ...btnsTxt.map((element) {
               return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ...element.map((el) {
                     return ElevatedButton(
                       onPressed: () {
-                        calc(el);
+                        myCalc(el);
                       },
                       child: Text(el,
                       style: TextStyle(
                         fontSize: 30
                       ),),
                       style: ButtonStyle(
-                        padding: WidgetStatePropertyAll(EdgeInsets.all(39)),
+                        backgroundColor: (["+","-","/","*"].contains(el))?
+                        WidgetStatePropertyAll(Colors.orange):
+                        WidgetStatePropertyAll(Colors.blue.shade50),
+                        padding: WidgetStatePropertyAll(EdgeInsets.all(30)),
+                        side: WidgetStatePropertyAll(BorderSide(color: Colors.black)),
+                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                        ))
+                        
                       ),
                     );
                   })
