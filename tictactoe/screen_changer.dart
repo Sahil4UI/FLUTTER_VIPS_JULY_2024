@@ -11,8 +11,20 @@ class ScreenChanger extends StatefulWidget {
 
 class _ScreenChangerState extends State<ScreenChanger> {
   var curr_screen = "home";
+  String playerChoice="";
+
+  screenChange(value) {
+    setState(() {
+      curr_screen = "gameScreen";
+      playerChoice = value;
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return (curr_screen=="home")?HomeScreen():TicTacToe();
+    return (curr_screen == "home")
+        ? HomeScreen(onTapFunction: screenChange)
+        : TicTacToe(choice:playerChoice);
   }
 }
