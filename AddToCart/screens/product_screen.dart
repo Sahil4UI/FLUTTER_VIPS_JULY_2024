@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data/products_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'cart_screen.dart';
+
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
 
@@ -25,7 +27,10 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, 
+              MaterialPageRoute(builder: (_)=>CartScreen()));
+            },
             icon: Icon(
               Icons.shopping_cart,
               size: 40,
