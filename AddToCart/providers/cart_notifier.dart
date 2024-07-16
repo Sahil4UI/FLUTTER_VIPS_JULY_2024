@@ -17,7 +17,9 @@ class CartNotifier extends ChangeNotifier{
          {
               found=true;
               cartList[i].productQty++;
-              
+              cartList[i].productAmount = cartList[i].productQty*curr_item.p_price;
+              print(cartList[i].productAmount);
+              notifyListeners();
               break;
          }
          else{
@@ -33,6 +35,21 @@ class CartNotifier extends ChangeNotifier{
        productAmount: curr_item.p_price));
        notifyListeners();
      }
+  }
+
+
+  plus(index)
+  {
+      var singleItemPrice = cartList[index].productAmount/cartList[index].productQty;
+      cartList[index].productQty++;
+      cartList[index].productAmount=cartList[index].productQty*singleItemPrice;
+      notifyListeners();
+  }
+
+  minus(index)
+  {
+      cartList[index].productQty--;
+      notifyListeners();
   }
 
 }

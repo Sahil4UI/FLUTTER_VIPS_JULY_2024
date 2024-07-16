@@ -38,9 +38,9 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Column(
                   children: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.exposure_plus_1))
+                IconButton(onPressed: (){obj.plus(index);}, icon: Icon(Icons.exposure_plus_1))
                 ,Text(obj.cartList[index].productQty.toString()),
-                IconButton(onPressed: (){}, icon: Icon(Icons.exposure_minus_1)),
+                IconButton(onPressed: (){obj.minus(index);}, icon: Icon(Icons.exposure_minus_1)),
 
                   ],
                 )
