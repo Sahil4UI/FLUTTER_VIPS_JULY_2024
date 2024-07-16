@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data/products_data.dart';
+import 'package:flutter_application_1/providers/cart_notifier.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_screen.dart';
 
@@ -14,6 +16,7 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
+    var obj=Provider.of<CartNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(
@@ -66,7 +69,9 @@ class _ProductScreenState extends State<ProductScreen> {
                             height: 10,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                                 obj.addToCart(index);
+                            },
                             icon: Icon(Icons.add_shopping_cart),
                             label: Text("Add To Cart"),
                           ),

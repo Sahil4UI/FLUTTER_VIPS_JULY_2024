@@ -1,7 +1,7 @@
 class CartModel {
   String id;
   String productName;
-  String productAmount;
+  double productAmount;
   int productQty;
 
   CartModel({
