@@ -13,7 +13,7 @@ class CartNotifier extends ChangeNotifier{
      bool found = false;
       for (int i=0;i<cartList.length;i++)
       {
-         if(cartList[i].id == curr_item.p_id)
+         if(cartList[i].id == curr_item!.p_id)
          {
               found=true;
               cartList[i].productQty++;
@@ -30,7 +30,7 @@ class CartNotifier extends ChangeNotifier{
      if (!found)
      {
       print("cart is empty");
-     cartList.add(CartModel(id:curr_item.p_id,
+     cartList.add(CartModel(id:curr_item!.p_id,
       productName: curr_item.p_name,
        productAmount: curr_item.p_price));
        notifyListeners();

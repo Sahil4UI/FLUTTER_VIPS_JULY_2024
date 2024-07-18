@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/models/products.dart';
 
-List products_list = [
+List<Products> products_list = [
   Products(
     "https://m.media-amazon.com/images/I/71657TiFeHL._SL1500_.jpg",
     "Apple iPhone 15 (128 GB) - Black",

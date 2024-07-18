@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data/products_data.dart';
 import 'package:flutter_application_1/providers/cart_notifier.dart';
+import 'package:flutter_application_1/providers/product_notifier.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +15,11 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  TextEditingController ctl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var obj=Provider.of<CartNotifier>(context);
+    var obj1=Provider.of<ProductNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: const Icon(
@@ -40,6 +43,17 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
           ),
         ],
+        bottom: PreferredSize(preferredSize: Size.fromHeight(60), 
+        child: TextField(
+          controller: ctl,
+          decoration: InputDecoration(
+            hintText: "Search for Product....",
+          ),
+          onSubmitted:(String value)
+          {
+            obj1.searchItem(value);
+          },
+        )),
       ),
       body: Container(
         child: ListView.builder(
